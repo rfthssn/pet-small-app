@@ -23,11 +23,10 @@ router.post('/add', auth,  async (req, res) => {
     const user = await User.findById(req.user.id);
     let new_pet_weight= new pet_weight({
       user: user.email,
-      weight_in_kg: req.body.weight_in_kg
+      weight_in_kg: req.body.weight_in_kg,
+      date: req.body.date ?? Date.now
     });
 
-
-   // if(user.email != new_pet_weight.user) throw Error(`user does not exist`);
     
     await new_pet_weight.save();
     res.json(new_pet_weight);
